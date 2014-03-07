@@ -8,42 +8,40 @@
 
 'use strict';
 
-module.exports = function(grunt) {
+var dox = require('../node_modules/dox/index.js');
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+module.exports = function(grunt) {
 
   grunt.registerMultiTask('dox', 'Creates documentation markdown for your source code', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
+          lang: 'js'
+        });
 
     // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
+    this.files.forEach(function(filePair) {
+
+      filePair.src.forEach(function(src) {
+        if(grunt.file.isDir(src)) {
+          return;
         }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
 
-      // Handle options.
-      src += options.punctuation;
+        var data = grunt.file.read(src)
+          , comments = dox.parseComments(data, {language: options.lang})
+          , markdown
+          , dest = filePair.dest;
 
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
+        try {
+          markdown = dox.api(comments);
+        } catch (e) {
+          grunt.log.error('Error generating documentation for file ' + src.cyan + ': ' + e);
+          return;
+        }
 
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
+        // Write the generated markdown to a file
+        grunt.file.write(dest, markdown);
+        grunt.log.writeln('Created documentation for ' + src.cyan +'--> ' + dest.cyan + '');
+      });
     });
   });
 
