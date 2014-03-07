@@ -16,7 +16,8 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('dox', 'Creates documentation markdown for your source code', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-          lang: 'js'
+          lang: 'js',
+          outputAs: 'md'
         });
 
     // Iterate over all specified file groups.
@@ -39,6 +40,13 @@ module.exports = function(grunt) {
         }
 
         comments = dox.parseComments(data, {language: options.lang});
+
+        // We can stop here if we're outputting the raw JSON comments
+        if(options.outputAs.toLowerCase() === 'json') {
+          grunt.file.write(dest, JSON.stringify(comments));
+          grunt.log.writeln('Created comment JSON for ' + src.cyan +'--> ' + dest.cyan + '');
+          return;
+        }
 
         try {
           markdown = dox.api(comments);
