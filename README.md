@@ -25,60 +25,44 @@ In your project's Gruntfile, add a section named `dox` to the data object passed
 ```js
 grunt.initConfig({
   dox: {
-    options: {
-      // Task-specific options go here.
-    },
     your_target: {
       // Target-specific file lists and/or options go here.
-    },
+      options: {
+        // Task-specific options go here.
+      },
+      files: [
+        // File lists go here
+      ]
+    }
   },
 });
 ```
 
 ### Options
 
-#### options.separator
+#### options.lang
 Type: `String`
-Default value: `',  '`
+Default value: `'js'`
 
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+The language style to use when parsing comments. Current possible values are `'js'` and `'php'`.
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, we generate docs for a set of PHP library files. Markdown files will be created in the `docs` folder with
+the same folder structure as the source files.
 
 ```js
 grunt.initConfig({
   dox: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      myCodez: {
+        options: {
+          lang: 'php'
+        },
+        files: [
+          {expand: true, cwd: 'library', src: '**/*', dest: 'docs/', ext: '.md'}
+        ]
+      }
     },
-  },
-});
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  dox: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
 });
 ```
 
