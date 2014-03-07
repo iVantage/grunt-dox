@@ -30,22 +30,14 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     dox: {
-      default_options: {
+      javascript_test: {
         options: {
+          lang: 'js'
         },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
-      },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!',
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
-      },
+        files: [
+          {expand: true, cwd: 'test/fixtures', src: '**/*', dest: 'tmp/', ext: '.md'}
+        ]
+      }
     },
 
     // Unit tests.
