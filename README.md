@@ -1,6 +1,6 @@
 # grunt-dox
 
-> Creates documentation markdown for your source code
+> Creates documentation markdown files for your source code using [Dox](https://github.com/iVantage/dox)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.2`
@@ -44,7 +44,7 @@ grunt.initConfig({
 Type: `String`
 Default value: `'js'`
 
-The language style to use when parsing comments. Current possible values are `'js'` and `'php'`.
+The language style to use when parsing comments. Current possible values are `'js'`, `'php'`, and `'4d'`.
 
 ### Usage Examples
 
