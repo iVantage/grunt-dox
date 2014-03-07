@@ -27,12 +27,16 @@ exports.dox = {
     // setup here if necessary
     done();
   },
-  default_options: function(test) {
-    test.expect(1);
+  generate_docs: function(test) {
+    test.expect(2);
 
     var actual = grunt.file.read('tmp/js/testing.md');
     var expected = grunt.file.read('test/expected/js/testing.md');
-    test.equal(actual, expected, 'should a markdown file for the comments.');
+    test.equal(actual, expected, 'should create a markdown file for javascript comments.');
+
+    actual = grunt.file.read('tmp/4d/test.md');
+    expected = grunt.file.read('test/expected/4d/test.md');
+    test.equal(actual, expected, 'should create a markdown file for 4D comments.');
 
     test.done();
   }

@@ -30,12 +30,20 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     dox: {
-      javascript_test: {
+      testJs: {
         options: {
           lang: 'js'
         },
         files: [
-          {expand: true, cwd: 'test/fixtures', src: '**/*', dest: 'tmp/', ext: '.md'}
+          {expand: true, cwd: 'test/fixtures', src: 'js/**/*', dest: 'tmp/', ext: '.md'}
+        ]
+      },
+      test4d: {
+        options: {
+          lang: '4D'
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures', src: '4d/**/*', dest: 'tmp/', ext: '.md'}
         ]
       }
     },
