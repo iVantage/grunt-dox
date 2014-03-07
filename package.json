@@ -37,7 +37,8 @@
     "grunt": "~0.4.2"
   },
   "dependencies": {
-    "grunt-dox": "ivantage/dox"
+    "dox": "ivantage/dox",
+    "4d-to-docblock": "ivantage/4d-to-docblock"
   },
   "keywords": [
     "gruntplugin"
