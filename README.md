@@ -73,6 +73,29 @@ grunt.initConfig({
 });
 ```
 
+```js
+grunt.initConfig({
+  dox: {
+    methods4D: {
+      options:{
+        lang:'4d',
+        outputAs:'html'
+      },
+      files:[
+        {
+          expand: true,
+          cwd: '__structure/ce_source/',
+          src: '*',
+          dest:'__docs/',
+          ext:'.html',
+          filter:''
+        }
+      ]
+    }
+  }
+});
+```
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 

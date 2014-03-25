@@ -9,7 +9,12 @@
 'use strict';
 
 var dox = require('../node_modules/dox/index.js')
-  , docBlock4D = require('../node_modules/4d-to-DocBlock/index.js');
+  , docBlock4D = require('../node_modules/4d-to-DocBlock/index.js')
+  , Handlebars = require('handlebars')
+  , gruntUtil = require('grunt')
+  ;
+
+var hbsTemplate = Handlebars.compile(gruntUtil.file.read(__dirname + '/../templates/index.hbs'));
 
 module.exports = function(grunt) {
 
@@ -45,6 +50,12 @@ module.exports = function(grunt) {
         if(options.outputAs.toLowerCase() === 'json') {
           grunt.file.write(dest, JSON.stringify(comments));
           grunt.log.writeln('Created comment JSON for ' + src.cyan +'--> ' + dest.cyan + '');
+          return;
+        }
+
+        if (options.outputAs.toLowerCase() === "html") {
+          grunt.file.write(dest, hbsTemplate(comments));
+          grunt.log.writeln('Created comment HTML for ' + src.cyan +'--> ' + dest.cyan + '');
           return;
         }
 

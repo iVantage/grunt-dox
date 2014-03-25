@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="styles/main.css">
+  </head>
+  <body>
+
+    <div class="masthead">
+      <nav class="container">
+        <a class="active" href="#">API</a>
+        <a href="#">Details</a>
+      </nav>
+    </div>
+
+    <div class="view-api container">
+
+      <div class="row">
+        <div class="col-sm-8 main">
+        {{#each blocks}}
+
+          {{#unless @index}}
+          <div class="pkg-header" id="api-{{@index}}">
+            <h1 class="pkg-title">{{{../../title}}}</h1>
+            <div class="pkg-summary">
+              {{{this.description.summary}}}
+            </div>
+            <div class="pkg-description">
+              {{{this.description.body}}}
+            </div>
+            <ul class="pkg-tags">
+              {{#each tags}}
+              {{#if this.type}}
+              <li>
+                <span class="tag-type">{{this.type}}</span>
+                <span class="tag-name">{{this.name}}</span>
+                <span class="tag-types">
+                  {{#each this.types}}
+                  <span>{{this}}</span>
+                  {{/each}}
+                </span>
+                <span class="tag-string">{{this.string}}</span>
+                <span class="tag-description">{{this.description}}</span>
+              </li>
+              {{/if}}
+              {{/each}}
+            </ul>
+          </div><!-- /.pkg-header -->
+
+          {{else}}
+
+          <div class="doc-block" id="api-{{@index}}">
+            {{#if this.ctx.name}}
+            <h1>{{{this.ctx.name}}}</h1>
+            <div class="doc-summary">{{{this.description.summary}}}</div>
+            {{else}}
+            <h1>{{{this.description.summary}}}</h1>
+            {{/if}}
+            <div class="doc-body">
+              {{{this.description.body}}}
+            </div>
+            <ul class="doc-block-tags">
+              {{#each tags}}
+              {{#if this.type}}
+              <li>
+                <span class="tag-type">{{this.type}}</span>
+                <span class="tag-name">{{this.name}}</span>
+                <span class="tag-types">
+                  {{#each this.types}}
+                  <span>{{this}}</span>
+                  {{/each}}
+                </span>
+                <span class="tag-string">{{this.string}}</span>
+                <span class="tag-description">{{this.description}}</span>
+              </li>
+              {{/if}}
+              {{/each}}
+            </ul>
+            {{#if this.code}}
+            <pre>
+{{this.code}}
+            </pre>
+            {{/if}}
+          </div>
+          {{/unless}}
+
+        {{/each}}
+
+        </div><!-- /.main -->
+
+        <div class="col-sm-3 col-sm-offset-1 sidebar">
+          <h1 class="sidebar-title">Contents</h1>
+          <ol>
+            <li><a href="#api-0">{{title}}</a></li>
+            {{#each blocks}}
+            {{#if @index}}
+            <li><a href="#api-{{@index}}">{{this.ctx.name}}</a></li>
+            {{/if}}
+            {{/each}}
+          </ol>
+        </div><!-- /.sidebar -->
+      </div>
+
+    </div><!-- /view-api.container -->
+
+    <div class="view-detail container">
+    </div>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+  </body>
+</html>
