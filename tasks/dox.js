@@ -12,7 +12,7 @@ var dox = require('../node_modules/dox/index.js')
   , docBlock4D = require('../node_modules/4d-to-DocBlock/index.js')
   , Handlebars = require('handlebars')
   , gruntUtil  = require('grunt')
-	, path       = require('path')
+  , path       = require('path')
   ;
 
 var hbsTemplate = Handlebars.compile(gruntUtil.file.read(__dirname + '/../templates/index.hbs'));
@@ -47,10 +47,10 @@ module.exports = function(grunt) {
 
         comments = dox.parseComments(data, {language: options.lang});
 
-				var docsObj = {
-					title: path.basename(src),
-					blocks: comments
-				};
+        var docsObj = {
+          title: path.basename(src),
+          blocks: comments
+        };
 
         // We can stop here if we're outputting the raw JSON comments
         if(options.outputAs.toLowerCase() === 'json') {
