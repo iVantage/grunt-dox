@@ -11,7 +11,8 @@
 var dox = require('../node_modules/dox/index.js')
   , docBlock4D = require('../node_modules/4d-to-DocBlock/index.js')
   , Handlebars = require('handlebars')
-  , gruntUtil = require('grunt')
+  , gruntUtil  = require('grunt')
+	, path       = require('path')
   ;
 
 var hbsTemplate = Handlebars.compile(gruntUtil.file.read(__dirname + '/../templates/index.hbs'));
@@ -46,15 +47,20 @@ module.exports = function(grunt) {
 
         comments = dox.parseComments(data, {language: options.lang});
 
+				var docsObj = {
+					title: path.basename(src),
+					blocks: comments
+				};
+
         // We can stop here if we're outputting the raw JSON comments
         if(options.outputAs.toLowerCase() === 'json') {
-          grunt.file.write(dest, JSON.stringify(comments));
+          grunt.file.write(dest, JSON.stringify(docsObj));
           grunt.log.writeln('Created comment JSON for ' + src.cyan +'--> ' + dest.cyan + '');
           return;
         }
 
         if (options.outputAs.toLowerCase() === "html") {
-          grunt.file.write(dest, hbsTemplate(comments));
+          grunt.file.write(dest, hbsTemplate(docsObj));
           grunt.log.writeln('Created comment HTML for ' + src.cyan +'--> ' + dest.cyan + '');
           return;
         }
