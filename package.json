@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "dox": "ivantage/dox",
-    "4d-to-docblock": "ivantage/4d-to-docblock",
+    "4d-to-DocBlock": "git://github.com/ivantage/4d-to-docblock",
     "handlebars":"~1.3.0"
   },
   "keywords": [
