@@ -34,12 +34,12 @@
     "grunt": "~0.4.2"
   },
   "peerDependencies": {
-    "grunt": "~0.4.2"
+    "grunt": ">=0.4.0"
   },
   "dependencies": {
     "dox": "ivantage/dox",
     "4d-to-DocBlock": "git://github.com/ivantage/4d-to-docblock",
-    "handlebars":"~1.3.0"
+    "handlebars": "~1.3.0"
   },
   "keywords": [
     "gruntplugin"
